@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="?android:attr/listPreferredItemHeight"
+    android:padding="6dip"
+    android:layout_marginTop="10dp">
+    <ImageView
+        android:id="@+id/useravatar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true" />
+    <LinearLayout
+        android:id="@+id/leftblock"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/userdiscription"
+        android:layout_alignTop="@+id/userdiscription"
+        android:layout_toLeftOf="@+id/useravatar"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/userdiscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nothing" />
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textColor="#8000FF" />
+    </LinearLayout>
+</RelativeLayout>

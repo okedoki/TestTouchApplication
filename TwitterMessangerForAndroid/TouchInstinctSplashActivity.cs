@@ -17,7 +17,6 @@ namespace TwitterMessangerForAndroid
 	[Activity (Label = "TouchInstinctSplashActivity", Theme = "@style/Theme.Splash", MainLauncher = true, NoHistory = true)]			
 	public class TouchInstinctSplashActivity : Activity
 	{
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -30,6 +29,7 @@ namespace TwitterMessangerForAndroid
 
 			// Create your application here
 		}
+
 		private  bool Autorize()
 		{
 			string api = "owHHftNHM2wJkmrurIuMeQ";
@@ -48,7 +48,6 @@ namespace TwitterMessangerForAndroid
 			request.AddBody("grant_type=client_credentials");
 
 			IRestResponse restResponse = client.Execute(request);
-
 
 			return true;
 		}

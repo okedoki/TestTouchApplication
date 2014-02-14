@@ -5,6 +5,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using RestSharp;
 using Xamarin.ActionbarSherlockBinding.App;
 
 namespace TwitterMessangerForAndroid
@@ -15,7 +16,6 @@ namespace TwitterMessangerForAndroid
 		TwitterWorker _tw;
 		ProgressDialog _progressDialog;
 		TagListViewAdapter _hc;
-
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -28,13 +28,13 @@ namespace TwitterMessangerForAndroid
 
 			ListView lw = FindViewById<ListView> (Resource.Id.TwitsListView);
 
-			_hc = new TagListViewAdapter (this);
+			_hc = new TagListViewAdapter ();
 			lw.Adapter = _hc;
 			lw.ChoiceMode = ChoiceMode.None;
 			lw.ItemClick += (sender, e) => {
 				Intent intent = new Intent(this, typeof(DetailInfoActivity));
 				Bundle b = new Bundle();
-				b.PutString("key", _hc[e.Position].owner.avatar_url); //Your id
+				b.PutString("key", _hc[e.Position].user.profile_image_url); //Your id
 				intent.PutExtras(b); //Put your id to your next Intent
 			    StartActivity(intent);
 			};
@@ -46,15 +46,16 @@ namespace TwitterMessangerForAndroid
 			actionBarWorker.AddTab ("tetris");
 			actionBarWorker.AddTab ("mario");
 			actionBarWorker.AddTab ("touchin");
+   
 
 
 		}
-
 		public void StartDataLoading(string parameterName)
 		{
 
 			_progressDialog.SetTitle ("Ждём загрузку данных");
 			_progressDialog.Show ();
+ 
 
 			System.Threading.Tasks.Task<RootObject> repositoriesTask = _tw.RepositoriesAsyncRequest (parameterName);
 			repositoriesTask.ContinueWith (DataLoaded);
@@ -64,7 +65,7 @@ namespace TwitterMessangerForAndroid
 		{   
 
 			RunOnUiThread (() => {
-				_hc.ChangeItemList (tr.Result.items);
+				_hc.ChangeItemList (tr.Result.statuses);
 				_progressDialog.Hide ();
 			});
 		}  

@@ -49,6 +49,9 @@
     <Reference Include="RestSharp.MonoDroid">
       <HintPath>lib\RestSharp.MonoDroid.dll</HintPath>
     </Reference>
+    <Reference Include="ActionBarSherlock">
+      <HintPath>lib\ActionBarSherlock.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

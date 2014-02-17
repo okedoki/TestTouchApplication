@@ -63,6 +63,7 @@
     <Compile Include="TagListViewAdapter.cs" />
     <Compile Include="TwitterWorker.cs" />
     <Compile Include="DetailInfoActivity.cs" />
+    <Compile Include="TweetSerializeInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -86,6 +87,7 @@
     <AndroidResource Include="Resources\drawable\icon_mail.png" />
     <AndroidResource Include="Resources\drawable\icon_phone.png" />
     <AndroidResource Include="Resources\layout\DatailInfoLayout.xml" />
+    <AndroidResource Include="Resources\layout\ListElementLayout.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

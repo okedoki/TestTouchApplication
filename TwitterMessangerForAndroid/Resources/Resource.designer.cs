@@ -846,14 +846,14 @@ namespace TwitterMessangerForAndroid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f04003b
-			public const int SimpleTextView = 2130968635;
+			// aapt resource value: 0x7f040041
+			public const int SimpleTextView = 2130968641;
 			
-			// aapt resource value: 0x7f04003a
-			public const int TwitsListView = 2130968634;
+			// aapt resource value: 0x7f040040
+			public const int TwitsListView = 2130968640;
 			
-			// aapt resource value: 0x7f04003c
-			public const int aboutmenuitem = 2130968636;
+			// aapt resource value: 0x7f040042
+			public const int aboutmenuitem = 2130968642;
 			
 			// aapt resource value: 0x7f040023
 			public const int abs__action_bar = 2130968611;
@@ -975,8 +975,23 @@ namespace TwitterMessangerForAndroid
 			// aapt resource value: 0x7f040010
 			public const int currenttagtextview = 2130968592;
 			
+			// aapt resource value: 0x7f040036
+			public const int detailleftblock = 2130968630;
+			
+			// aapt resource value: 0x7f040035
+			public const int detailuseravatar = 2130968629;
+			
+			// aapt resource value: 0x7f040039
+			public const int detailuserdiscription = 2130968633;
+			
+			// aapt resource value: 0x7f04003a
+			public const int detailusername = 2130968634;
+			
 			// aapt resource value: 0x7f040009
 			public const int disableHome = 2130968585;
+			
+			// aapt resource value: 0x7f04003e
+			public const int discription = 2130968638;
 			
 			// aapt resource value: 0x7f040029
 			public const int edit_query = 2130968617;
@@ -984,8 +999,11 @@ namespace TwitterMessangerForAndroid
 			// aapt resource value: 0x7f040006
 			public const int homeAsUp = 2130968582;
 			
-			// aapt resource value: 0x7f040036
-			public const int leftblock = 2130968630;
+			// aapt resource value: 0x7f04003c
+			public const int leftblock = 2130968636;
+			
+			// aapt resource value: 0x7f04003b
+			public const int listElementRelativeLayout = 2130968635;
 			
 			// aapt resource value: 0x7f040002
 			public const int listMode = 2130968578;
@@ -993,8 +1011,8 @@ namespace TwitterMessangerForAndroid
 			// aapt resource value: 0x7f040012
 			public const int mailtouchinbutton = 2130968594;
 			
-			// aapt resource value: 0x7f040039
-			public const int mainlayout = 2130968633;
+			// aapt resource value: 0x7f04003f
+			public const int mainlayout = 2130968639;
 			
 			// aapt resource value: 0x7f040001
 			public const int normal = 2130968577;
@@ -1017,14 +1035,14 @@ namespace TwitterMessangerForAndroid
 			// aapt resource value: 0x7f040004
 			public const int useLogo = 2130968580;
 			
-			// aapt resource value: 0x7f040035
-			public const int useravatar = 2130968629;
+			// aapt resource value: 0x7f040038
+			public const int useravatar = 2130968632;
 			
 			// aapt resource value: 0x7f040037
 			public const int userdiscription = 2130968631;
 			
-			// aapt resource value: 0x7f040038
-			public const int username = 2130968632;
+			// aapt resource value: 0x7f04003d
+			public const int username = 2130968637;
 			
 			// aapt resource value: 0x7f040000
 			public const int wrap_content = 2130968576;
@@ -1128,13 +1146,16 @@ namespace TwitterMessangerForAndroid
 			public const int DatailInfoLayout = 2130903062;
 			
 			// aapt resource value: 0x7f030017
-			public const int Main = 2130903063;
+			public const int ListElementLayout = 2130903063;
 			
 			// aapt resource value: 0x7f030018
-			public const int sherlock_spinner_dropdown_item = 2130903064;
+			public const int Main = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int sherlock_spinner_item = 2130903065;
+			public const int sherlock_spinner_dropdown_item = 2130903065;
+			
+			// aapt resource value: 0x7f03001a
+			public const int sherlock_spinner_item = 2130903066;
 			
 			static Layout()
 			{

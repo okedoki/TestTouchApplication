@@ -18,9 +18,13 @@ namespace TwitterMessangerForAndroid
 		{
 			base.OnCreate (bundle);
 			Bundle b = Intent.Extras;
-			string id = b.GetString("key");
+			TweetInfo tweetInfo = TweetInfoSerializer.Deserialize(b.GetString("Avatar"));
 
-			 Toast.MakeText(this, id, ToastLength.Long).Show();
+			SetContentView (Resource.Layout.DatailInfoLayout);
+
+			this.FindViewById<TextView> (Resource.Id.detailusername).Text = tweetInfo.nameText;
+
+			 //Toast.MakeText(this, id, ToastLength.Long).Show();
 			// Create your application here
 		}
 	}

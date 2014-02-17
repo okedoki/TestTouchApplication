@@ -22,7 +22,7 @@ namespace TwitterMessangerForAndroid
 		public TwitterWorker()
 		{
 			_client= new RestClient(); 
-			_client.Authenticator = RestSharp.Authenticators.OAuth1Authenticator.ForAccessToken ("owHHftNHM2wJkmrurIuMeQ", "UU4a8c3C9OJiiNQxrlQfoXQWnWnd4zW5XeSzjcCMLsQ", "595522277-pgAEtj8G5o9MjphKwcjHFrxRRYuYfrceXdB5ZBTf", "5udj2MFyfMUti8MOnURFksFHgYLYJtBn08oVPd72khrq4");
+			_client.Authenticator = RestSharp.Authenticators.OAuth1Authenticator.ForAccessToken ("8xFPkfa6Gxs9IzKhV8mhsw", "h0qWBTAamX9NjsFU0ynFkvKql4zpQMqia7FUgoTLZA", "595522277-pgAEtj8G5o9MjphKwcjHFrxRRYuYfrceXdB5ZBTf", "5udj2MFyfMUti8MOnURFksFHgYLYJtBn08oVPd72khrq4");
  
 		}
 		public Task<RootObject> RepositoriesAsyncRequest(string searchName)
@@ -30,36 +30,50 @@ namespace TwitterMessangerForAndroid
 			var request = new RestRequest("https://api.twitter.com/1.1/search/tweets.json");
 			request.AddParameter ("q", searchName);
 			request.AddParameter ("count", 5);
+ 
 			var tcs=new TaskCompletionSource<RootObject>();
 			_client.ExecuteAsync<RootObject>(request, responce => { 
+			 	if(responce.ResponseStatus !=  ResponseStatus.Completed) throw new Exception("Проблема с обработкой запроса  на сервере");
+				
+
+
 				tcs.SetResult(responce.Data);
 			});
 			return tcs.Task;
 		}
 	}
-}
 
 
 
 
 public class User
 {
-	public int id { get; set; }
+	public string id { get; set; }
 	public string id_str { get; set; }
 	public string name { get; set; }
 	public string screen_name { get; set; }
 	public string location { get; set; }
 	public string description { get; set; }
 	public object url { get; set; }
-	public string profile_image_url { get; set; }
+	public string profile_image_url 
+	{
+			set{profileImage = DownloadUserAvatar (value);}
+	}
+
+	public Android.Graphics.Bitmap  profileImage { get; private set;}
 	public string profile_image_url_https { get; set; }
+	private Android.Graphics.Bitmap  DownloadUserAvatar(string bitmapUrl)
+		{
+			Java.Net.URL url = new Java.Net.URL (bitmapUrl);
+			return Android.Graphics.BitmapFactory.DecodeStream (url .OpenConnection ().InputStream);
+		}
 }
 
 public class UserMention
 {
 	public string screen_name { get; set; }
 	public string name { get; set; }
-	public int id { get; set; }
+	public string id { get; set; }
 	public string id_str { get; set; }
 	public List<int> indices { get; set; }
 }
@@ -74,8 +88,9 @@ public class Entities2
 
 public class Status
 {
+	public long d;
 	public string created_at { get; set; }
-	public long id { get; set; }
+	public string id { get; set; }
 	public string id_str { get; set; }
 	public string text { get; set; }
 	public string source { get; set; }
@@ -87,4 +102,5 @@ public class Status
 public class RootObject
 {
 	public List<Status> statuses { get; set; }
+}
 }

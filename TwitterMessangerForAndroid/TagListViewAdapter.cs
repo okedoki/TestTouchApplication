@@ -33,31 +33,39 @@ namespace TwitterMessangerForAndroid
 		public override Int32 Count {
  			get { return _status.Count; }
 		}
-	
+		private class ViewHolder:Java.Lang.Object {
+			public TextView nameTextView;
+			public TextView dicriptionTextView;
+			public ImageView userImageView;
+		}
+		private ViewHolder holder;
+
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
-			//			TextView view = new TextView (context);
-			//			view.Text = items [position];
-			//		
-			//		
-		//	parent.Context;
-//			var	view = LayoutInflater.FromContext(parent.Context).Inflate (Android.Resource.Layout.SimpleListItem1, null);
-//			view.Clickable = false;
-//			view.Focusable = false; 
+			holder = new ViewHolder ();
 
-			TextView textView = new TextView(parent.Context);
-			textView.SetMinHeight(parent.Height / 5);
-		//	TextView textView = view.FindViewById<TextView> (Android.Resource.Id.Text1);
-		//	textView.Clickable = false;
-		//	textView.Focusable = false; 
+			if (convertView == null) {
+				convertView = LayoutInflater.FromContext (parent.Context).Inflate (Resource.Layout.ListElementLayout, null);
+				holder.nameTextView = convertView.FindViewById<TextView> (Resource.Id.username);	
+				holder.dicriptionTextView = convertView.FindViewById<TextView> (Resource.Id.discription);
+				holder.userImageView = convertView.FindViewById<ImageView> (Resource.Id.useravatar);
+				holder.nameTextView.Clickable = false;
+				convertView.Tag = holder;
+			} else {
+				 holder = convertView.Tag as ViewHolder;
+			}
 
 
-			textView.Text = _status [position].text;
-			textView.SetBackgroundColor (Android.Graphics.Color.BlueViolet); 
-			//			view.FindViewById<TextView>(Android.Resource.Id.Text1).Text = items[position];
 
-			return textView;
+			holder.nameTextView.Text = _status [position].user.screen_name;
+
+			string disctiption = _status [position].text;
+			holder.dicriptionTextView.Text = disctiption.Substring(0, Math.Min(30, disctiption.Length));
+			holder.userImageView.SetImageBitmap(_status [position].user.profileImage);
+
+			return convertView;
 		}
+
 
 		public void ChangeItemList(List<Status> newItemList)
 			{

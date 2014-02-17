@@ -7,6 +7,8 @@ using Android.Widget;
 using Android.OS;
 using RestSharp;
 using Xamarin.ActionbarSherlockBinding.App;
+ 
+ 
 
 namespace TwitterMessangerForAndroid
 {
@@ -16,6 +18,9 @@ namespace TwitterMessangerForAndroid
 		TwitterWorker _tw;
 		ProgressDialog _progressDialog;
 		TagListViewAdapter _hc;
+
+ 
+
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -31,11 +36,12 @@ namespace TwitterMessangerForAndroid
 			_hc = new TagListViewAdapter ();
 			lw.Adapter = _hc;
 			lw.ChoiceMode = ChoiceMode.None;
+
 			lw.ItemClick += (sender, e) => {
 				Intent intent = new Intent(this, typeof(DetailInfoActivity));
 				Bundle b = new Bundle();
-				b.PutString("key", _hc[e.Position].user.profile_image_url); //Your id
-				intent.PutExtras(b); //Put your id to your next Intent
+				b.PutString("Avatar", TweetInfoSerializer.Serialize(new TweetInfo{nameText = _hc[e.Position].user.screen_name, dicriptionText = _hc[e.Position].text})); //Your id
+		    	intent.PutExtras(b); //Put your id to your next Intent
 			    StartActivity(intent);
 			};
 
@@ -43,9 +49,9 @@ namespace TwitterMessangerForAndroid
 			actionBar.NavigationMode = (int)ActionBarNavigationMode.Tabs;
 			ActionBarWorker actionBarWorker = new ActionBarWorker (this.SupportActionBar, this.FindViewById (Resource.Id.mainlayout));
 
-			actionBarWorker.AddTab ("tetris");
-			actionBarWorker.AddTab ("mario");
-			actionBarWorker.AddTab ("touchin");
+			actionBarWorker.AddTab ("#putin");
+			actionBarWorker.AddTab ("#sochi");
+			actionBarWorker.AddTab ("#love");
    
 
 

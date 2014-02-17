@@ -978,14 +978,17 @@ namespace TwitterMessangerForAndroid
 			// aapt resource value: 0x7f040036
 			public const int detailleftblock = 2130968630;
 			
+			// aapt resource value: 0x7f040039
+			public const int detailtextview = 2130968633;
+			
 			// aapt resource value: 0x7f040035
 			public const int detailuseravatar = 2130968629;
 			
-			// aapt resource value: 0x7f040039
-			public const int detailuserdiscription = 2130968633;
+			// aapt resource value: 0x7f040037
+			public const int detailuserdiscription = 2130968631;
 			
-			// aapt resource value: 0x7f04003a
-			public const int detailusername = 2130968634;
+			// aapt resource value: 0x7f040038
+			public const int detailusername = 2130968632;
 			
 			// aapt resource value: 0x7f040009
 			public const int disableHome = 2130968585;
@@ -1002,8 +1005,8 @@ namespace TwitterMessangerForAndroid
 			// aapt resource value: 0x7f04003c
 			public const int leftblock = 2130968636;
 			
-			// aapt resource value: 0x7f04003b
-			public const int listElementRelativeLayout = 2130968635;
+			// aapt resource value: 0x7f04003a
+			public const int listElementRelativeLayout = 2130968634;
 			
 			// aapt resource value: 0x7f040002
 			public const int listMode = 2130968578;
@@ -1035,11 +1038,8 @@ namespace TwitterMessangerForAndroid
 			// aapt resource value: 0x7f040004
 			public const int useLogo = 2130968580;
 			
-			// aapt resource value: 0x7f040038
-			public const int useravatar = 2130968632;
-			
-			// aapt resource value: 0x7f040037
-			public const int userdiscription = 2130968631;
+			// aapt resource value: 0x7f04003b
+			public const int useravatar = 2130968635;
 			
 			// aapt resource value: 0x7f04003d
 			public const int username = 2130968637;

@@ -40,7 +40,7 @@ namespace TwitterMessangerForAndroid
 			lw.ItemClick += (sender, e) => {
 				Intent intent = new Intent(this, typeof(DetailInfoActivity));
 				Bundle b = new Bundle();
-				b.PutString("Avatar", TweetInfoSerializer.Serialize(new TweetInfo{nameText = _hc[e.Position].user.screen_name, dicriptionText = _hc[e.Position].text})); //Your id
+				b.PutString("Avatar", TweetInfoSerializer.Serialize(new TweetInfo{nameText = _hc[e.Position].user.screen_name, dicriptionText = _hc[e.Position].text, Avatar = _hc[e.Position].user.profileImage})); //Your id
 		    	intent.PutExtras(b); //Put your id to your next Intent
 			    StartActivity(intent);
 			};

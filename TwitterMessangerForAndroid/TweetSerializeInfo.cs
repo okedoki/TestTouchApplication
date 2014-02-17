@@ -1,53 +1,48 @@
 using System;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
 using Android.Widget;
 using System.IO;
 
 namespace TwitterMessangerForAndroid
 {
-//	class TweetInfo:Java.Lang.Object, Java.IO.ISerializable
-//	{
-//		public string nameText{ get; set;}
-//		public string dicriptionText{ get; set;}
-//		//public Android.Graphics.Bitmap userImageView;
-//
-//		[Java.Interop.Export ("readObject", Throws = new [] {
-//			typeof (Java.IO.IOException),
-//			typeof (Java.Lang.ClassNotFoundException)})]
-//		private void ReadTweetInfo (Java.IO.ObjectInputStream source)
-//		{
-//			nameText = ReadNullableString (source);
-//			dicriptionText = ReadNullableString (source);
-//		}
-//
-//		[Java.Interop.Export ("writeObject", Throws = new [] {
-//			typeof (Java.IO.IOException),
-//			typeof (Java.Lang.ClassNotFoundException)})]
-//		private void WriteTweetInfo (Java.IO.ObjectOutputStream destination)
-//		{
-//			WriteNullableString (destination, nameText);
-//			WriteNullableString (destination, dicriptionText);
-//		}
-//		static void WriteNullableString (Java.IO.ObjectOutputStream dest, string value)
-//		{
-//			dest.WriteBoolean (value != null);
-//			if (value != null)
-//				dest.WriteUTF (value);
-//		}
-//
-//		static string ReadNullableString (Java.IO.ObjectInputStream source)
-//		{
-//			if (source.ReadBoolean ())
-//				return source.ReadUTF ();
-//			return null;
-//		}
-//	}
+	
 	[Serializable]
 		public class TweetInfo
 		{
 			public string nameText{ get; set;}
-			public string dicriptionText{ get; set;}
+	 		public string dicriptionText{ get; set;}
+	
+		    private string codedAvatar;
+	 
+		public Android.Graphics.Bitmap Avatar {
+			get {
+				return UnCodeBitMap(codedAvatar);
+			}
+			set {
+				CodeBitMap(value);
+			}
+		}
+		 
+		private void CodeBitMap(Android.Graphics.Bitmap value)
+		    {
+			using (MemoryStream ms = new MemoryStream())
+			{
+				value.Compress(Android.Graphics.Bitmap.CompressFormat.Webp,100, ms);
+				codedAvatar = Convert.ToBase64String(ms.ToArray());
+	         }
+		    }
+
+		private Android.Graphics.Bitmap UnCodeBitMap(string codedString)
+		{
+			using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(codedString)))
+			{
+				return Android.Graphics.BitmapFactory.DecodeStream (ms);
+			}
+		}
 	    }
+
+	    
 
 	    public static class TweetInfoSerializer
 		{
@@ -65,7 +60,7 @@ namespace TwitterMessangerForAndroid
 			  IFormatter formatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 			  using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Base64TweetInfo)))
 				{
-					return new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter().Deserialize(ms) as TweetInfo;
+				return formatter.Deserialize(ms) as TweetInfo;
 				}
 		 
 			}

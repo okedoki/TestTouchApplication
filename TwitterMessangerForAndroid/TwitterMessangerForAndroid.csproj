@@ -64,6 +64,7 @@
     <Compile Include="TwitterWorker.cs" />
     <Compile Include="DetailInfoActivity.cs" />
     <Compile Include="TweetSerializeInfo.cs" />
+    <Compile Include="TabFragment.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

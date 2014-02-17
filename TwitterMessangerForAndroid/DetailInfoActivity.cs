@@ -23,7 +23,8 @@ namespace TwitterMessangerForAndroid
 			SetContentView (Resource.Layout.DatailInfoLayout);
 
 			this.FindViewById<TextView> (Resource.Id.detailusername).Text = tweetInfo.nameText;
-
+			this.FindViewById<TextView> (Resource.Id.detailtextview).Text = tweetInfo.dicriptionText;
+			this.FindViewById<ImageView> (Resource.Id.detailuseravatar).SetImageBitmap(tweetInfo.Avatar);
 			 //Toast.MakeText(this, id, ToastLength.Long).Show();
 			// Create your application here
 		}

@@ -15,13 +15,6 @@ namespace TwitterMessangerForAndroid
 	[Activity (Label = "TwitterMessangerForAndroid", MainLauncher = true)]
 	public class MainActivity : SherlockFragmentActivity
 	{
-	
-		private ProgressDialog _progressDialog;
-
-
-
-		private long maxId;
-		private string query;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
@@ -29,9 +22,7 @@ namespace TwitterMessangerForAndroid
 			SetTheme (Resource.Style.Theme_Sherlock);
 			SetContentView (Resource.Layout.Main);
 
-			 
 
- 
 
 			Xamarin.ActionbarSherlockBinding.App.ActionBar actionBar = this.SupportActionBar;
 			actionBar.NavigationMode = (int)ActionBarNavigationMode.Tabs;
@@ -43,15 +34,14 @@ namespace TwitterMessangerForAndroid
 			actionBarWorker.AddTab ("#putin");
 			actionBarWorker.AddTab ("#sochi");
 			actionBarWorker.AddTab ("#love");
-		    actionBar.SelectTab (actionBar.GetTabAt (0));
-
+			actionBar.SelectTab (actionBar.GetTabAt (0));
 
 		}
 
 
 		public override bool OnCreateOptionsMenu (Xamarin.ActionbarSherlockBinding.Views.IMenu menu)
 		{
-			//SupportMenuInflater.Inflate (Resource.Menu.menu, menu);
+		    SupportMenuInflater.Inflate (Resource.Menu.menu, menu);
 			return true;
 		}
 

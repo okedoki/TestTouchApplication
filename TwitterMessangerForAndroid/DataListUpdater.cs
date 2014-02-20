@@ -25,16 +25,9 @@ namespace TwitterMessangerForAndroid
 		{   
 
 			activity.RunOnUiThread (() => {
-		//		try
-		//		{
 					adapter.ChangeItemList (tr.Result.statuses);
-				//}
-//				catch()
-//				{
-//
-//				}
-
-				 });
+				 }
+			);
 		}  
 	}
 }

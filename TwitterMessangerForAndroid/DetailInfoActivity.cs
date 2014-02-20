@@ -18,11 +18,11 @@ namespace TwitterMessangerForAndroid
 		{
 			base.OnCreate (bundle);
 			Bundle b = Intent.Extras;
-			TweetInfo tweetInfo = TweetInfoSerializer.Deserialize(b.GetString("TweetInfo"));
+			TweetInfo tweetInfo = 	TweetInfoXMLSerializer.Deserialize(b.GetString("TweetInfo"));
 
 			SetContentView (Resource.Layout.DatailInfoLayout);
 
- 
+		
 	       
 			DateTime dt = DateTime.ParseExact(tweetInfo.TweetDateTime,
 			                                  "ddd MMM dd HH:mm:ss zzz yyyy",
@@ -32,7 +32,11 @@ namespace TwitterMessangerForAndroid
 			this.FindViewById<TextView> (Resource.Id.detaildatetextview).Text = dt.ToString ("d", new System.Globalization.CultureInfo ("ru-Ru"));
 		 	this.FindViewById<TextView> (Resource.Id.detailusername).Text = tweetInfo.NameText;
 			this.FindViewById<TextView> (Resource.Id.detailtextview).Text = tweetInfo.DicriptionText;
-			this.FindViewById<ImageView> (Resource.Id.detailuseravatar).SetImageBitmap(tweetInfo.Avatar);
+
+
+			ImageView avatarImageView = this.FindViewById<ImageView> (Resource.Id.detailuseravatar);
+		
+	 		Com.Nostra13.Universalimageloader.Core.ImageLoader.Instance.DisplayImage (tweetInfo.AvatarUrl, avatarImageView);
 		}
 	}
 }

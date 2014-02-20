@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 using RestSharp;
 using RestSharp.Serializers;
+using Com.Nostra13.Universalimageloader.Core;
 
 namespace TwitterMessangerForAndroid
 {
@@ -54,7 +55,7 @@ namespace TwitterMessangerForAndroid
 		{	 
 			var tcs=new TaskCompletionSource<RootObject>();
 			_client.ExecuteAsync<RootObject>(request, responce => { 
-				tcs.SetResult(responce.Data);
+				tcs.SetResult(responce.Data?? new RootObject());
 			});
 			return tcs.Task;
 		}
@@ -68,23 +69,16 @@ public class User
 	public string id { get; set; }
 	public string id_str { get; set; }
 	public string name { get; set; }
-	public string screen_name { get; set; }
+	public string screen_name { get; set; } 
 	public string location { get; set; }
 	public string description { get; set; }
 	public object url { get; set; }
-	public string profile_image_url 
-	{
-			set{profileImage = DownloadUserAvatar (value);}
-	}
+    public string profile_image_url { get; set; }
 
-	public Android.Graphics.Bitmap  profileImage { get; private set;}
-	public string profile_image_url_https { get; set; }
-	private Android.Graphics.Bitmap  DownloadUserAvatar(string bitmapUrl)
-		{
-			Java.Net.URL url = new Java.Net.URL (bitmapUrl);
-			return Android.Graphics.BitmapFactory.DecodeStream (url .OpenConnection ().InputStream);
-		}
+	public Android.Graphics.Bitmap  profileImage { get; set; }
+
 }
+
 
 public class UserMention
 {
@@ -129,5 +123,7 @@ public class RootObject
 {
 	public SearchMetadata search_metadata { get; set; }
 	public List<Status> statuses { get; set; }
+
+
 }
 }

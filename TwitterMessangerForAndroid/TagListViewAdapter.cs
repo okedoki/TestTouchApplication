@@ -8,13 +8,14 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Com.Nostra13.Universalimageloader.Core;
 
 namespace TwitterMessangerForAndroid
 {
 	public class TagListViewAdapter : BaseAdapter<Status>
 	{
 		List<Status> _status;
-		 
+ 
 		public TagListViewAdapter () : base()
 		{
 
@@ -33,35 +34,34 @@ namespace TwitterMessangerForAndroid
 		public override Int32 Count {
  			get { return _status.Count; }
 		}
-		private class ViewHolder:Java.Lang.Object {
-			public TextView nameTextView;
-			public TextView dicriptionTextView;
-			public ImageView userImageView;
-		}
-		private ViewHolder holder;
+		
+
 
 		public override View GetView (int position, View convertView, ViewGroup parent)
 		{
-			holder = new ViewHolder ();
-
+		
 			if (convertView == null) {
 				convertView = LayoutInflater.FromContext (parent.Context).Inflate (Resource.Layout.ListElementLayout, null);
-				holder.nameTextView = convertView.FindViewById<TextView> (Resource.Id.username);	
-				holder.dicriptionTextView = convertView.FindViewById<TextView> (Resource.Id.discription);
-				holder.userImageView = convertView.FindViewById<ImageView> (Resource.Id.useravatar);
-				holder.nameTextView.Clickable = false;
-				convertView.Tag = holder;
-			} else {
-				 holder = convertView.Tag as ViewHolder;
 			}
+			TextView nameTextView = convertView.FindViewById<TextView> (Resource.Id.username);	
+			TextView descriptionTextView = convertView.FindViewById<TextView> (Resource.Id.discription);
+
+			ImageView userImageView = convertView.FindViewById<ImageView> (Resource.Id.useravatar);
+	
+			ImageLoader.Instance.CancelDisplayTask(userImageView);	
+			ImageLoader.Instance.DisplayImage(_status [position].user.profile_image_url, userImageView);
+	 
+	
 
 
+		
 
-			holder.nameTextView.Text = _status [position].user.screen_name;
+			nameTextView.Clickable = false;
+			nameTextView.Text = _status [position].user.screen_name;
 
-			string disctiption = _status [position].text;
-			holder.dicriptionTextView.Text = disctiption.Substring(0, Math.Min(30, disctiption.Length));
-			holder.userImageView.SetImageBitmap(_status [position].user.profileImage);
+			string description = _status [position].text;
+			descriptionTextView.Text = description.Substring(0, Math.Min(30, description.Length));
+ 
 
 			return convertView;
 		}
@@ -75,8 +75,8 @@ namespace TwitterMessangerForAndroid
 				this._status.AddRange (newItemList);
 			this.NotifyDataSetChanged();
 		}
-			 
-
 	}
+
 }
+
 

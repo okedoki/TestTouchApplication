@@ -83,29 +83,18 @@ namespace TwitterMessangerForAndroid
 			if (index != -1)
 			{
 				_viewPager.SetCurrentItem(index, true);
- 
- 
-
-		
-
-//				MainActivity  calledActivity= _view.Context as MainActivity;
-//				string parameterName = p0.Text;
-//				calledActivity.StartDataLoading(parameterName,0);
 			}
-
 
 		}
 
 		public void OnTabReselected (Xamarin.ActionbarSherlockBinding.App.ActionBar.Tab p0, Android.Support.V4.App.FragmentTransaction p1)
-		{
-		           
+		{           
 		}
 
 
 
 		public void OnTabUnselected (Xamarin.ActionbarSherlockBinding.App.ActionBar.Tab p0, Android.Support.V4.App.FragmentTransaction p1)
 		{
-			//throw new NotImplementedException ();
 		}
 
 	}

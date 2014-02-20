@@ -90,4 +90,10 @@
   <ItemGroup>
     <Folder Include="Resources\menu\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UniversalImageLoader\UniversalImageLoader.csproj">
+      <Project>{EED1A347-4EB9-4141-893F-B18C2C7D7D0D}</Project>
+      <Name>UniversalImageLoader</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>

@@ -25,18 +25,35 @@ namespace TwitterMessangerForAndroid
 			_client.Authenticator = RestSharp.Authenticators.OAuth1Authenticator.ForAccessToken ("8xFPkfa6Gxs9IzKhV8mhsw", "h0qWBTAamX9NjsFU0ynFkvKql4zpQMqia7FUgoTLZA", "595522277-pgAEtj8G5o9MjphKwcjHFrxRRYuYfrceXdB5ZBTf", "5udj2MFyfMUti8MOnURFksFHgYLYJtBn08oVPd72khrq4");
  
 		}
-		public Task<RootObject> RepositoriesAsyncRequest(string searchName)
-		{	
-			var request = new RestRequest("https://api.twitter.com/1.1/search/tweets.json");
-			request.AddParameter ("q", searchName);
-			request.AddParameter ("count", 5);
+
+		public Task<RootObject> StartRequest(string searchName)
+		{
+
  
+			var restRequest = new RestRequest("https://api.twitter.com/1.1/search/tweets.json") ;
+
+			restRequest.AddParameter ("q", searchName);
+		 	restRequest.AddParameter ("count", 5);
+
+			return RepositoriesAsyncRequest (restRequest);
+		}
+		public Task<RootObject> StartRepeatedRequest(string searchName, long maxId)
+		{
+
+			var restRequest = new RestRequest("https://api.twitter.com/1.1/search/tweets.json");
+
+			restRequest.AddParameter ("max_id", maxId);
+			restRequest.AddParameter ("q", searchName);
+			restRequest.AddParameter ("count", 5);
+
+			return RepositoriesAsyncRequest (restRequest);	  
+		}
+	
+
+		public Task<RootObject> RepositoriesAsyncRequest(RestRequest request)
+		{	 
 			var tcs=new TaskCompletionSource<RootObject>();
 			_client.ExecuteAsync<RootObject>(request, responce => { 
-			 	if(responce.ResponseStatus !=  ResponseStatus.Completed) throw new Exception("Проблема с обработкой запроса  на сервере");
-				
-
-
 				tcs.SetResult(responce.Data);
 			});
 			return tcs.Task;
@@ -97,10 +114,20 @@ public class Status
 	public User user { get; set; }
 	public Entities2 entities { get; set; }
 }
+	public class SearchMetadata
+	{
+		public double completed_in { get; set; }
+		public long max_id { get; set; }
+		public string next_results { get; set; }
+		public string query { get; set; }
+		public string refresh_url { get; set; }
+		public int count { get; set; }
+	}
 
 
 public class RootObject
 {
+	public SearchMetadata search_metadata { get; set; }
 	public List<Status> statuses { get; set; }
 }
 }

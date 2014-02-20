@@ -6,13 +6,21 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <ListView
-        android:id="@+id/TwitsListView"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tweetpager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1" />
-    <TextView
-        android:id="@+id/SimpleTextView"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <ListView
+            android:id="@+id/TwitsListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.view.ViewPager>
+    <Button
+        android:id="@+id/MoreTwittsButton"
+        android:text="Показать ещё"
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:onClick="moreTwittsClick" />
 </LinearLayout>

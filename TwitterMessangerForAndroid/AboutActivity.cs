@@ -18,7 +18,6 @@ namespace TwitterMessangerForAndroid
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.About);
-			// Create your application here
 		}
 		[Java.Interop.Export("linkbuttonclick")]
 		public void linkbuttonclick(View view) {

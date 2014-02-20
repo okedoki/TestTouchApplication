@@ -57,14 +57,14 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TouchInstinctSplashActivity.cs" />
     <Compile Include="ActionBarClasses.cs" />
     <Compile Include="AboutActivity.cs" />
     <Compile Include="TagListViewAdapter.cs" />
     <Compile Include="TwitterWorker.cs" />
     <Compile Include="DetailInfoActivity.cs" />
     <Compile Include="TweetSerializeInfo.cs" />
-    <Compile Include="TabFragment.cs" />
+    <Compile Include="TweetTabFragment.cs" />
+    <Compile Include="DataListUpdater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -75,11 +75,6 @@
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\values\Strings.xml" />
     <AndroidResource Include="Resources\drawable\Icon.png" />
-    <AndroidResource Include="Resources\drawable\splash.png" />
-    <AndroidResource Include="Resources\values\Styles.xml" />
-    <AndroidResource Include="Resources\drawable\button_more_pressed.9.png" />
-    <AndroidResource Include="Resources\drawable\button_more.9.png" />
-    <AndroidResource Include="Resources\drawable\table_pressed.9.png" />
     <AndroidResource Include="Resources\drawable\icon_info.png" />
     <AndroidResource Include="Resources\menu\menu.xml" />
     <AndroidResource Include="Resources\layout\About.xml">
@@ -89,6 +84,7 @@
     <AndroidResource Include="Resources\drawable\icon_phone.png" />
     <AndroidResource Include="Resources\layout\DatailInfoLayout.xml" />
     <AndroidResource Include="Resources\layout\ListElementLayout.xml" />
+    <AndroidResource Include="Resources\layout\TwitsListView.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

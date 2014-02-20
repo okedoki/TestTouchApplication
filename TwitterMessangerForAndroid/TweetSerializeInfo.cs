@@ -10,9 +10,9 @@ namespace TwitterMessangerForAndroid
 	[Serializable]
 		public class TweetInfo
 		{
-			public string nameText{ get; set;}
-	 		public string dicriptionText{ get; set;}
-	
+			public string NameText{ get; set;}
+	 		public string DicriptionText{ get; set;}
+		    public string TweetDateTime{ get; set;}
 		    private string codedAvatar;
 	 
 		public Android.Graphics.Bitmap Avatar {

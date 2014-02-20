@@ -69,7 +69,10 @@ namespace TwitterMessangerForAndroid
 
 		public void ChangeItemList(List<Status> newItemList)
 			{
-       		this._status = newItemList;
+			if (this._status.Count == 0)
+				this._status = newItemList;
+			else
+				this._status.AddRange (newItemList);
 			this.NotifyDataSetChanged();
 		}
 			 

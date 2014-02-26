@@ -15,6 +15,13 @@ namespace TwitterMessangerForAndroid
 	public class TagListViewAdapter : BaseAdapter<Status>
 	{
 		List<Status> _status;
+
+		public List<Status> status {
+			get {
+				return _status;
+			}
+	
+		}
  
 		public TagListViewAdapter () : base()
 		{
@@ -50,17 +57,12 @@ namespace TwitterMessangerForAndroid
 	
 			ImageLoader.Instance.CancelDisplayTask(userImageView);	
 			ImageLoader.Instance.DisplayImage(_status [position].user.profile_image_url, userImageView);
-	 
-	
-
-
-		
-
+	 	
 			nameTextView.Clickable = false;
 			nameTextView.Text = _status [position].user.screen_name;
 
 			string description = _status [position].text;
-			descriptionTextView.Text = description.Substring(0, Math.Min(30, description.Length));
+			descriptionTextView.Text = description.Substring(0, Math.Min(30, description.Length)).Replace(System.Environment.NewLine, " ");
  
 
 			return convertView;
@@ -69,6 +71,8 @@ namespace TwitterMessangerForAndroid
 
 		public void ChangeItemList(List<Status> newItemList)
 			{
+			if (newItemList == null)
+				return;
 			if (this._status.Count == 0)
 				this._status = newItemList;
 			else

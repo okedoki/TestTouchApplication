@@ -4,6 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:padding="6dip"
+    android:background="@drawable/listitemselector"
     android:layout_marginTop="10dp">
     <ImageView
         android:layout_alignParentLeft="true"
@@ -12,21 +13,26 @@
         android:layout_height="60dp" />
     <LinearLayout
         android:id="@+id/leftblock"
+        android:paddingLeft="30dp"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_toRightOf="@+id/useravatar"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="bottom"
+        android:paddingBottom="10dp">
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:text="Name" />
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="Name"
+            android:textColor="#ffffffff"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/discription"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:textSize="13dp"
             android:text="Nothing" />
     </LinearLayout>
 </RelativeLayout>

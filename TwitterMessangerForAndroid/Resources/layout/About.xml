@@ -5,29 +5,46 @@
     android:layout_height="fill_parent"
     android:minWidth="25px"
     android:minHeight="25px">
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="150dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/logo" />
     <TextView
         android:text=" Нам не стыдно за выпускаемые продукты, все они сделаны с вниманием к деталям. Пользователи это ценят, многие наши приложения попадают в топы AppStore и получают высокие оценки.  Мы любим своих заказчиков и решаем их задачи. На письма и телефон отвечаем быстро, по праздникам и выходным, делаем работу в срок и никуда не пропадаем. Закажите разработку сейчас! "
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:id="@+id/currenttagtextview" />
+        android:layout_height="wrap_content"
+        android:id="@+id/currenttagtextview"
+        android:textSize="13dp"
+        android:textColor="#ffffffff"
+        android:layout_margin="25dp" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp">
         <ImageButton
             android:src="@drawable/icon_phone"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:background="@drawable/aboutbuttonselector"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:id="@+id/phonetouchinbutton"
-            android:onClick="linkbuttonclick" />
-        <ImageButton
-            android:src="@drawable/icon_mail"
+            android:onClick="linkbuttonclick"
+            android:scaleType="center"
+            android:layout_marginLeft="20dp" />
+        <View
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_height="match_parent" />
+        <ImageButton
+            android:src="@drawable/icon_mail"
+            android:background="@drawable/aboutbuttonselector"
+            android:layout_width="100dp"
             android:layout_height="50dp"
             android:id="@+id/mailtouchinbutton"
-            android:onClick="linkbuttonclick" />
+            android:onClick="linkbuttonclick"
+            android:scaleType="center"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp" />
     </LinearLayout>
 </LinearLayout>

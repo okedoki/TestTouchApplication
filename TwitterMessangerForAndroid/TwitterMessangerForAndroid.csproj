@@ -29,6 +29,7 @@
     <WarningLevel>4</WarningLevel>
     <AndroidLinkMode>None</AndroidLinkMode>
     <ConsolePause>false</ConsolePause>
+    <EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -65,6 +66,7 @@
     <Compile Include="TweetSerializeInfo.cs" />
     <Compile Include="TweetTabFragment.cs" />
     <Compile Include="DataListUpdater.cs" />
+    <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -84,11 +86,20 @@
     <AndroidResource Include="Resources\drawable\icon_phone.png" />
     <AndroidResource Include="Resources\layout\DatailInfoLayout.xml" />
     <AndroidResource Include="Resources\layout\ListElementLayout.xml" />
-    <AndroidResource Include="Resources\layout\TwitsListView.xml" />
+    <AndroidResource Include="Resources\drawable\splash.png" />
+    <AndroidResource Include="Resources\layout\SplashLayout.axml" />
+    <AndroidResource Include="Resources\drawable\logo.png" />
+    <AndroidResource Include="Resources\values\style.xml" />
+    <AndroidResource Include="Resources\drawable\Icon_small.png" />
+    <AndroidResource Include="Resources\drawable\listitemselector.xml" />
+    <AndroidResource Include="Resources\drawable\button.9.png" />
+    <AndroidResource Include="Resources\drawable\button_pressed.9.png" />
+    <AndroidResource Include="Resources\drawable\aboutbuttonselector.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Resources\menu\" />
+    <Folder Include="Resources\style\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UniversalImageLoader\UniversalImageLoader.csproj">

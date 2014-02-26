@@ -13,49 +13,64 @@ using RestSharp;
 using RestSharp.Serializers;
 using Com.Nostra13.Universalimageloader.Core;
 
+ 
 namespace TwitterMessangerForAndroid
 {
 	class TwitterWorker
 	{
 		RestClient _client;
-		
-
+		 
 		public TwitterWorker()
 		{
 			_client= new RestClient(); 
 			_client.Authenticator = RestSharp.Authenticators.OAuth1Authenticator.ForAccessToken ("8xFPkfa6Gxs9IzKhV8mhsw", "h0qWBTAamX9NjsFU0ynFkvKql4zpQMqia7FUgoTLZA", "595522277-pgAEtj8G5o9MjphKwcjHFrxRRYuYfrceXdB5ZBTf", "5udj2MFyfMUti8MOnURFksFHgYLYJtBn08oVPd72khrq4");
- 
+			_client.Timeout = 150000;   
 		}
-
+	 
+		private static System.Collections.Generic.Dictionary<string, ulong> maxIdDistionary = new Dictionary<string,ulong>();
+	 
+ 
 		public Task<RootObject> StartRequest(string searchName)
 		{
-
- 
-			var restRequest = new RestRequest("https://api.twitter.com/1.1/search/tweets.json") ;
+            var restRequest = new RestRequest("https://api.twitter.com/1.1/search/tweets.json") ;
 
 			restRequest.AddParameter ("q", searchName);
-		 	restRequest.AddParameter ("count", 5);
+	    	restRequest.AddParameter ("count", 5);
+			restRequest.AddParameter ("include_entities", 1);
+	 
+			if (maxIdDistionary.ContainsKey (searchName)) {
+				ulong maxId = maxIdDistionary [searchName];
+				restRequest.AddParameter ("max_id", maxId);
+			}
+			else {
+
+				maxIdDistionary.Add (searchName, 0);
+			}
+ 
 
 			return RepositoriesAsyncRequest (restRequest);
 		}
-		public Task<RootObject> StartRepeatedRequest(string searchName, long maxId)
-		{
 
-			var restRequest = new RestRequest("https://api.twitter.com/1.1/search/tweets.json");
-
-			restRequest.AddParameter ("max_id", maxId);
-			restRequest.AddParameter ("q", searchName);
-			restRequest.AddParameter ("count", 5);
-
-			return RepositoriesAsyncRequest (restRequest);	  
-		}
 	
 
 		public Task<RootObject> RepositoriesAsyncRequest(RestRequest request)
 		{	 
 			var tcs=new TaskCompletionSource<RootObject>();
-			_client.ExecuteAsync<RootObject>(request, responce => { 
-				tcs.SetResult(responce.Data?? new RootObject());
+			_client.ExecuteAsync<RootObject>(request, responce =>
+			{ 
+				if (responce != null && responce.ErrorException == null && responce.ResponseStatus == ResponseStatus.Completed)
+				{
+					tcs.SetResult(
+						responce.Data ?? new RootObject());
+					System.Collections.Specialized.NameValueCollection nextQueryParams = RestSharp.Contrib.HttpUtility.ParseQueryString(responce.Data.search_metadata.next_results);
+				
+					ulong maxId = Convert.ToUInt64(nextQueryParams["max_Id"]);
+					string q = nextQueryParams["q"];
+					maxIdDistionary[q] = maxId;
+ 
+				}
+				else
+					tcs.TrySetException(new Exception("Проблема с соединением. Попробуйте пойзже.")); 
 			});
 			return tcs.Task;
 		}
@@ -111,7 +126,7 @@ public class Status
 	public class SearchMetadata
 	{
 		public double completed_in { get; set; }
-		public long max_id { get; set; }
+		public ulong max_id { get; set; }
 		public string next_results { get; set; }
 		public string query { get; set; }
 		public string refresh_url { get; set; }

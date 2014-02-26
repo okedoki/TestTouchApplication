@@ -12,32 +12,45 @@ using Xamarin.ActionbarSherlockBinding.App;
 
 namespace TwitterMessangerForAndroid
 {
-	[Activity (Label = "TwitterMessangerForAndroid", MainLauncher = true)]
+	[Activity (Label = "TwitterMessangerForAndroid", MainLauncher = false)]
 	public class MainActivity : SherlockFragmentActivity
 	{
+		private Android.Support.V4.View.ViewPager pager;
+		private ActionBarAdapter _actionBarWorker;
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 
-			SetTheme (Resource.Style.Theme_Sherlock);
+			SetTheme (Resource.Style.ActionBarTheme);
 			SetContentView (Resource.Layout.Main);
+ 
+ 
+			SupportActionBar.SetIcon (Android.Resource.Color.Transparent);
 
-
-
+				 
 			Xamarin.ActionbarSherlockBinding.App.ActionBar actionBar = this.SupportActionBar;
+
 			actionBar.NavigationMode = (int)ActionBarNavigationMode.Tabs;
 			 
-		 
-			var actionBarWorker = new ActionBarWorker(this, actionBar, FindViewById<Android.Support.V4.View.ViewPager>(Resource.Id.tweetpager));
+			 pager = FindViewById<Android.Support.V4.View.ViewPager> (Resource.Id.tweetpager);
+			pager.CurrentItem = 1;
+			_actionBarWorker = new ActionBarAdapter(this, actionBar, pager);
 
+		
+			_actionBarWorker.AddTab ("#putin");
+			_actionBarWorker.AddTab ("#sochi");
+			_actionBarWorker.AddTab ("#love");
+		
 
-			actionBarWorker.AddTab ("#putin");
-			actionBarWorker.AddTab ("#sochi");
-			actionBarWorker.AddTab ("#love");
-			actionBar.SelectTab (actionBar.GetTabAt (0));
-
+			Button b =  FindViewById<Button> (Resource.Id.MoreTwittsButton);
+			b.Click += moreTwittsClick;
+		
+	
 		}
-
+		public void moreTwittsClick(object sender, EventArgs e)
+		{
+			_actionBarWorker.NextQuery ();
+		}
 
 		public override bool OnCreateOptionsMenu (Xamarin.ActionbarSherlockBinding.Views.IMenu menu)
 		{
@@ -50,10 +63,22 @@ namespace TwitterMessangerForAndroid
 			StartActivity (typeof(AboutActivity));
 			return base.OnOptionsItemSelected (item);
 		}
-		[Java.Interop.Export("moreTwittsClick")]
-		public void moreTwittsClick(View v)
+ 
+	
+		protected override void OnSaveInstanceState (Bundle outState)
 		{
-	//		StartDataLoading (query, maxId);
+			base.OnSaveInstanceState (outState);
+			outState.PutInt ("PagerPage", pager.CurrentItem);
+
 		}
+		protected override void OnRestoreInstanceState (Bundle savedInstanceState)
+		{
+			base.OnRestoreInstanceState (savedInstanceState);
+			int currentPage = savedInstanceState.GetInt ("PagerPage", 0);
+			if (currentPage < 0 && currentPage >= _actionBarWorker.Count)
+				return;
+			pager.CurrentItem = currentPage;
+		}
+
 	}
 }

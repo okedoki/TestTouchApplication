@@ -8,16 +8,31 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
- 
+using Xamarin.ActionbarSherlockBinding.App;
+
 namespace TwitterMessangerForAndroid
 {
-	[Activity (Label = "AboutActivity")]			
-	public class AboutActivity : Activity
+	[Activity (Label = "AboutActivity",Theme = "@style/Theme.Sherlock")]			
+	public class AboutActivity : SherlockActivity
 	{
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
 			SetContentView (Resource.Layout.About);
+			this.Title ="#Back";
+
+			SupportActionBar.SetDisplayHomeAsUpEnabled (true);
+			SupportActionBar.SetDisplayShowHomeEnabled (false);
+
+
+
+		}
+		public override bool OnOptionsItemSelected (Xamarin.ActionbarSherlockBinding.Views.IMenuItem p0)
+		{
+			if (p0.ItemId == Android.Resource.Id.Home) {
+				OnBackPressed ();
+			}
+			return base.OnOptionsItemSelected (p0);
 		}
 		[Java.Interop.Export("linkbuttonclick")]
 		public void linkbuttonclick(View view) {
@@ -34,9 +49,8 @@ namespace TwitterMessangerForAndroid
 				StartActivity(email);
 				break;
 			case(Resource.Id.phonetouchinbutton):
-				Toast.MakeText(this,"phonetouchinbutton", ToastLength.Long).Show();
 				Intent phone = new Intent(Intent.ActionDial, 
-				                          Android.Net.Uri.Parse(string.Format("tel:{0}", "+7 931 002-89-90")));
+				            Android.Net.Uri.Parse(string.Format("tel:{0}", "+7 931 002-89-90")));
 				StartActivity(phone);
 				break;
 		 
